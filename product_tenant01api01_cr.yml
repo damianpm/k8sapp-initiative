@@ -1,0 +1,7 @@
+apiVersion: k8sinitiative.3scale.net/v1alpha1
+kind: Product
+metadata:
+  name: tenant02api01
+  namespace: k8sinitiative
+spec:
+  description: "Hello world!"
