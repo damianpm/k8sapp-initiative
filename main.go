@@ -17,7 +17,7 @@ var kubeconfig string
 
 func main() {
 
-	ns := "eguzki"
+	ns := "k8sinitiative"
 
 	s := scheme.Scheme
 	v1alpha1.AddToScheme(s)
