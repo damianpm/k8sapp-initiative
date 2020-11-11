@@ -4,7 +4,7 @@ metadata:
   name: products-read-rb
 subjects:
 - kind: ServiceAccount
-  name: products-reader
+  name: products-viewer
   namespace: k8sinitiative
 roleRef:
   kind: Role
