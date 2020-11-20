@@ -1,9 +1,47 @@
-apiVersion: apiextensions.k8s.io/v1beta1
+apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   name: products.k8sinitiative.3scale.net
 spec:
   group: k8sinitiative.3scale.net
+  versions:
+    - name: v1alpha1
+      served: true
+      storage: true
+      schema:
+          openAPIV3Schema:
+            type: object
+            properties:
+              spec:
+                type: object
+                properties:
+                  description: 
+                    type: string
+                  apps_count: 
+                    type: integer
+                  backends_count:
+                    type: integer
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  system_name:
+                    type: string
+                  link:
+                    type: string
+                  links:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        path:
+                          type: string
+                  unread_alerts_count:
+                    type: integer
+                  updated_at:
+                    type: string
   names:
     kind: Product
     listKind: ProductList
@@ -12,4 +50,3 @@ spec:
     - pdcs
     singular: product
   scope: Namespaced
-  version: v1alpha1
