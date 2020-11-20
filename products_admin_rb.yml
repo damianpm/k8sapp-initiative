@@ -1,12 +1,12 @@
 kind: RoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: products-read-rb
+  name: products-admin-rb
 subjects:
 - kind: ServiceAccount
-  name: products-viewer
+  name: products-admin
   namespace: k8sinitiative
 roleRef:
   kind: Role
-  name: products-read
+  name: products-admin
   apiGroup: ""

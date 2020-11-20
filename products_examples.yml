@@ -1,0 +1,15 @@
+apiVersion: k8sinitiative.3scale.net/v1alpha1
+kind: Product
+metadata:
+  name: product-api-01
+  namespace: k8sinitiative
+spec:
+  description: "Hello world!"
+---
+apiVersion: k8sinitiative.3scale.net/v1alpha1
+kind: Product
+metadata:
+  name: product-api-02
+  namespace: k8sinitiative
+spec:
+  description: "Hola mundo!"
