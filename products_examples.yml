@@ -25,7 +25,8 @@ spec:
     - name: "Integration"
       path: "/apiconfig/services/1/integration"
   unread_alerts_count: 0
-  updated_at: "September 22, 2020 10:23"
+  created_at: "1605407040000"
+  updated_at: "1606125362370"
 ---
 apiVersion: k8sinitiative.3scale.net/v1alpha1
 kind: Product
@@ -54,5 +55,5 @@ spec:
     - name: "Integration"
       path: "/apiconfig/services/2/integration"
   unread_alerts_count: 0
-  updated_at: "September 22, 2020 10:23"
-  
+  created_at: "1605406215000"
+  updated_at: "1606125384132"
