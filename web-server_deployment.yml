@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-server-deployment
+  namespace: k8sinitiative
+spec:
+  selector:
+    matchLabels:
+      app: web-server
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: web-server
+    spec:
+      serviceAccountName: products-admin
+      namespace: k8sinitiative
+      containers:
+      - name: web-server
+        image: quay.io/didierofrivia/go-fetch-products:latest
+        imagePullPolicy: IfNotPresent
+        env:
+        - name: PORT
+          value: "8080"
+        ports:
+        - containerPort: 8080
