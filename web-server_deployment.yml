@@ -18,7 +18,6 @@ spec:
       containers:
       - name: web-server
         image: quay.io/didierofrivia/go-fetch-products:latest
-        imagePullPolicy: IfNotPresent
         env:
         - name: PORT
           value: "8080"
