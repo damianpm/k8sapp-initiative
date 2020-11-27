@@ -4,7 +4,29 @@ metadata:
   name: product-api-01
   namespace: k8sinitiative
 spec:
-  description: "Hello world!"
+  description: "Product 1"
+  apps_count: 1
+  backends_count: 1
+  id: 1
+  name: "API 1"
+  system_name: "api_1"
+  link: "/apiconfig/services/1"
+  links:
+    - name: "Edit"
+      path: "/apiconfig/services/1/edit"
+    - name: "Overview"
+      path: "/apiconfig/services/1"
+    - name: "Analytics"
+      path: "/services/1/stats/usage"
+    - name: "Applications"
+      path: "/apiconfig/services/1/applications"
+    - name: "ActiveDocs"
+      path: "/apiconfig/services/1/api_docs"
+    - name: "Integration"
+      path: "/apiconfig/services/1/integration"
+  unread_alerts_count: 0
+  created_at: "1605407040000"
+  updated_at: "1606125362370"
 ---
 apiVersion: k8sinitiative.3scale.net/v1alpha1
 kind: Product
@@ -12,4 +34,26 @@ metadata:
   name: product-api-02
   namespace: k8sinitiative
 spec:
-  description: "Hola mundo!"
+  description: "Product 2"
+  apps_count: 2
+  backends_count: 1
+  id: 2
+  name: "API 2"
+  system_name: "api_2"
+  link: "/apiconfig/services/2"
+  links:
+    - name: "Edit"
+      path: "/apiconfig/services/2/edit"
+    - name: "Overview"
+      path: "/apiconfig/services/2"
+    - name: "Analytics"
+      path: "/services/2/stats/usage"
+    - name: "Applications"
+      path: "/apiconfig/services/2/applications"
+    - name: "ActiveDocs"
+      path: "/apiconfig/services/2/api_docs"
+    - name: "Integration"
+      path: "/apiconfig/services/2/integration"
+  unread_alerts_count: 0
+  created_at: "1605406215000"
+  updated_at: "1606125384132"
