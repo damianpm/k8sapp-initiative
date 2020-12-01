@@ -6,6 +6,7 @@ RUN cd /codebase && go build -v -o /codebase/bin/server ./pkg/main.go
 
 FROM alpine:3.11 as stage2
 COPY --from=stage1 /codebase/bin/server /server
+COPY --from=stage1 /codebase/pkg/templates /templates
 
 USER root
 RUN apk add --update curl

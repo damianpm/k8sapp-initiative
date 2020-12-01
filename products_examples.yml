@@ -57,3 +57,63 @@ spec:
   unread_alerts_count: 0
   created_at: "1605406215000"
   updated_at: "1606125384132"
+---
+apiVersion: k8sinitiative.3scale.net/v1alpha1
+kind: Product
+metadata:
+  name: product-api-03
+  namespace: k8sinitiative
+spec:
+  description: "Product 3"
+  apps_count: 1
+  backends_count: 1
+  id: 1
+  name: "API 3"
+  system_name: "api_3"
+  link: "/apiconfig/services/3"
+  links:
+    - name: "Edit"
+      path: "/apiconfig/services/3/edit"
+    - name: "Overview"
+      path: "/apiconfig/services/3"
+    - name: "Analytics"
+      path: "/services/3/stats/usage"
+    - name: "Applications"
+      path: "/apiconfig/services/3/applications"
+    - name: "ActiveDocs"
+      path: "/apiconfig/services/3/api_docs"
+    - name: "Integration"
+      path: "/apiconfig/services/3/integration"
+  unread_alerts_count: 0
+  created_at: "1606839277962"
+  updated_at: "1606839303838"
+---
+apiVersion: k8sinitiative.3scale.net/v1alpha1
+kind: Product
+metadata:
+  name: product-api-04
+  namespace: k8sinitiative
+spec:
+  description: "Product 4"
+  apps_count: 1
+  backends_count: 1
+  id: 1
+  name: "API 34"
+  system_name: "api_4"
+  link: "/apiconfig/services/1"
+  links:
+    - name: "Edit"
+      path: "/apiconfig/services/4/edit"
+    - name: "Overview"
+      path: "/apiconfig/services/4"
+    - name: "Analytics"
+      path: "/services/4/stats/usage"
+    - name: "Applications"
+      path: "/apiconfig/services/4/applications"
+    - name: "ActiveDocs"
+      path: "/apiconfig/services/4/api_docs"
+    - name: "Integration"
+      path: "/apiconfig/services/4/integration"
+  unread_alerts_count: 0
+  created_at: "1606839316291"
+  updated_at: "1606839323672"

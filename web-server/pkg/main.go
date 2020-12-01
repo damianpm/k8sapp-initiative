@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"html/template"
 	"log"
 	"net/http"
 	"os"
@@ -61,14 +62,20 @@ func StartWebServer() {
 	}
 }
 
+type IndexTemplateData struct {
+	Title string
+}
+
 func handleHomePage(w http.ResponseWriter, r *http.Request) {
 	urlPath := r.URL.Path
 	log.Printf("Web request received on url path %s", urlPath)
-	msg := "Hello world"
-	_, err := w.Write([]byte(msg))
+	indexTemplateData := IndexTemplateData{Title: "k8s initiative"}
+	temp, err := template.ParseFiles("templates/index.html")
+
 	if err != nil {
 		fmt.Printf("Failed to write response, err: %s", err)
 	}
+	temp.Execute(w, indexTemplateData)
 }
 
 func handleProductsPage(w http.ResponseWriter, r *http.Request) {

@@ -17,6 +17,9 @@ type ProductSpec struct {
 	BackendsCount *int    `json:"backends_count"`
 	Name          *string `json:"name"`
 	SystemName    *string `json:"system_name"`
+	UnreadAlerts  *int    `json:"unread_alerts_count"`
+	UpdatedAt     *string `json:"updated_at"`
+	Link          *string `json:"link"`
 }
 
 type ProductList struct {
