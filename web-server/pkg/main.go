@@ -50,6 +50,8 @@ func init() {
 func StartWebServer() {
 	http.HandleFunc(homepageEndPoint, handleHomePage)
 	http.HandleFunc(productsEndPoint, handleProductsPage)
+	fs := http.FileServer(http.Dir("./templates/styles"))
+	http.Handle("/templates/styles/", http.StripPrefix("/templates/styles/", fs))
 	port := os.Getenv("PORT")
 	if len(port) == 0 {
 		panic("Environment variable PORT is not set")
