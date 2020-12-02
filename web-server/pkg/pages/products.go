@@ -17,9 +17,9 @@ func Index(w http.ResponseWriter, productList v1alpha1.ProductList) {
 		}
 	}
 
-	temp, err := template.ParseFiles("../templates/products.html")
+	temp, err := template.ParseFiles("../templates/layout.html", "../templates/products.html")
 	check(err)
 
-	err = temp.Execute(w, productList)
+	err = temp.ExecuteTemplate(w, "layout", productList)
 	check(err)
 }

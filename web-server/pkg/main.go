@@ -72,12 +72,12 @@ func handleHomePage(w http.ResponseWriter, r *http.Request) {
 	urlPath := r.URL.Path
 	log.Printf("Web request received on url path %s", urlPath)
 	indexTemplateData := IndexTemplateData{Title: "k8s initiative"}
-	temp, err := template.ParseFiles("templates/index.html")
+	temp, err := template.ParseFiles("templates/layout.html", "templates/index.html")
 
 	if err != nil {
 		fmt.Printf("Failed to write response, err: %s", err)
 	}
-	temp.Execute(w, indexTemplateData)
+	temp.ExecuteTemplate(w, "layout", indexTemplateData)
 }
 
 func handleProductsPage(w http.ResponseWriter, r *http.Request) {
