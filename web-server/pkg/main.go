@@ -18,6 +18,10 @@ import (
 const homepageEndPoint = "/"
 const productsEndPoint = "/products"
 
+func init() {
+	v1alpha1.AddToScheme(scheme.Scheme)
+}
+
 // StartWebServer the webserver
 func StartWebServer() {
 	http.HandleFunc(homepageEndPoint, handleHomePage)
@@ -50,8 +54,6 @@ func handleProductsPage(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		panic(err.Error())
 	}
-
-	v1alpha1.AddToScheme(scheme.Scheme)
 
 	crdConfig := *config
 	crdConfig.ContentConfig.GroupVersion = &schema.GroupVersion{Group: v1alpha1.GroupName, Version: v1alpha1.GroupVersion}
