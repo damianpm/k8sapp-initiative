@@ -18,8 +18,31 @@ import (
 const homepageEndPoint = "/"
 const productsEndPoint = "/products"
 
+var restClient *rest.RESTClient
+
+func setupClient() *rest.RESTClient {
+	// creates the in-cluster config
+	config, err := rest.InClusterConfig()
+	if err != nil {
+		panic(err.Error())
+	}
+
+	crdConfig := *config
+	crdConfig.ContentConfig.GroupVersion = &schema.GroupVersion{Group: v1alpha1.GroupName, Version: v1alpha1.GroupVersion}
+	crdConfig.APIPath = "/apis"
+	crdConfig.NegotiatedSerializer = serializer.NewCodecFactory(scheme.Scheme)
+	crdConfig.UserAgent = rest.DefaultKubernetesUserAgent()
+
+	restClient, err := rest.RESTClientFor(&crdConfig)
+	if err != nil {
+		panic(err)
+	}
+	return restClient
+}
+
 func init() {
 	v1alpha1.AddToScheme(scheme.Scheme)
+	restClient = setupClient()
 }
 
 // StartWebServer the webserver
@@ -49,40 +72,23 @@ func handleHomePage(w http.ResponseWriter, r *http.Request) {
 }
 
 func handleProductsPage(w http.ResponseWriter, r *http.Request) {
-	// creates the in-cluster config
-	config, err := rest.InClusterConfig()
-	if err != nil {
-		panic(err.Error())
-	}
-
-	crdConfig := *config
-	crdConfig.ContentConfig.GroupVersion = &schema.GroupVersion{Group: v1alpha1.GroupName, Version: v1alpha1.GroupVersion}
-	crdConfig.APIPath = "/apis"
-	crdConfig.NegotiatedSerializer = serializer.NewCodecFactory(scheme.Scheme)
-	crdConfig.UserAgent = rest.DefaultKubernetesUserAgent()
-
-	threescaleRestClient, err := rest.RESTClientFor(&crdConfig)
-	if err != nil {
-		panic(err)
-	}
 	result := v1alpha1.ProductList{}
 
-	getErr := threescaleRestClient.
+	getErr := restClient.
 		Get().
 		Namespace("k8sinitiative").
 		Resource("products").
 		Do().
 		Into(&result)
 
+	if getErr != nil {
+		panic(getErr)
+	}
+
 	fmt.Printf("%d results found: %+v\n", len(result.Items), result)
 	fmt.Println(getErr)
+
 	products.Index(w, result)
-	/* msg := fmt.Sprintf("%d results found: %+v\n", len(result.Items), result)
-	_, writeErr := w.Write([]byte(msg))
-	if writeErr != nil {
-		fmt.Printf("Failed to write response, err: %s", writeErr)
-	}
-	*/
 }
 
 func main() {
