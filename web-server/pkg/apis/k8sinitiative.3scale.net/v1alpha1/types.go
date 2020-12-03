@@ -11,7 +11,7 @@ type Product struct {
 }
 
 type ProductSpec struct {
-	ID            *int    `json:"id"`
+	ID            *int    `json:"id,omitempty"`
 	Description   *string `json:"description"`
 	AppsCount     *int    `json:"apps_count"`
 	BackendsCount *int    `json:"backends_count"`
