@@ -1,0 +1,17 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: web-server
+  namespace: k8sinitiative
+  resourceVersion: "72299960"
+  selfLink: /apis/route.openshift.io/v1/namespaces/k8sinitiative/routes/web-server
+  uid: 18489824-19e1-4965-8cbb-f2f3cf2d05b4
+spec:
+  host: k8sinitiative.apps.dev-eng-ocp4-5.dev.3sca.net
+  port:
+    targetPort: 8080
+  to:
+    kind: Service
+    name: web-server
+    weight: 100
+  wildcardPolicy: None
