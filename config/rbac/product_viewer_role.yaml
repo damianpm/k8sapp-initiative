@@ -1,0 +1,20 @@
+# permissions for end users to view products.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: product-viewer-role
+rules:
+- apiGroups:
+  - k8sinitiative.3scale.net
+  resources:
+  - products
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - k8sinitiative.3scale.net
+  resources:
+  - products/status
+  verbs:
+  - get

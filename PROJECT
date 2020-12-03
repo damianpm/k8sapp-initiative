@@ -1,0 +1,12 @@
+domain: 3scale.net
+layout: go.kubebuilder.io/v2
+multigroup: true
+projectName: srijita-k8s-app-initiative
+repo: github.com/3scale/k8sapp-initiative
+resources:
+- group: k8sinitiative
+  kind: Product
+  version: v1alpha1
+version: 3-alpha
+plugins:
+  go.sdk.operatorframework.io/v2-alpha: {}
