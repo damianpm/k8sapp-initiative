@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"html/template"
 	"log"
 	"net/http"
 	"os"
@@ -49,6 +50,8 @@ func init() {
 func StartWebServer() {
 	http.HandleFunc(homepageEndPoint, handleHomePage)
 	http.HandleFunc(productsEndPoint, handleProductsPage)
+	fs := http.FileServer(http.Dir("./templates/styles"))
+	http.Handle("/templates/styles/", http.StripPrefix("/templates/styles/", fs))
 	port := os.Getenv("PORT")
 	if len(port) == 0 {
 		panic("Environment variable PORT is not set")
@@ -61,14 +64,20 @@ func StartWebServer() {
 	}
 }
 
+type IndexTemplateData struct {
+	Title string
+}
+
 func handleHomePage(w http.ResponseWriter, r *http.Request) {
 	urlPath := r.URL.Path
 	log.Printf("Web request received on url path %s", urlPath)
-	msg := "Hello world"
-	_, err := w.Write([]byte(msg))
+	indexTemplateData := IndexTemplateData{Title: "k8s initiative"}
+	temp, err := template.ParseFiles("templates/layout.html", "templates/index.html")
+
 	if err != nil {
 		fmt.Printf("Failed to write response, err: %s", err)
 	}
+	temp.ExecuteTemplate(w, "layout", indexTemplateData)
 }
 
 func handleProductsPage(w http.ResponseWriter, r *http.Request) {

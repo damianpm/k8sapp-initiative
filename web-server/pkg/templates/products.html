@@ -1,0 +1,70 @@
+{{define "content"}}
+<h1>Products</h1>
+<table class="pf-c-table pf-m-grid-lg" role="grid" aria-label="This is a table with checkboxes"
+  id="table-checkboxes-and-actions">
+  <caption>Explore and manage all customer-facing APIs that contain one or more of your Backends.</caption>
+  <thead>
+    <tr role="row">
+      <td class="pf-c-table__check" role="cell">
+        <input type="checkbox" name="table-checkboxes-and-actions-check-all" aria-label="Select all rows" />
+      </td>
+      <th role="columnheader" scope="col">Name</th>
+      <th role="columnheader" scope="col">System name</th>
+      <th role="columnheader" scope="col">Description</th>
+      <th role="columnheader" scope="col">Last updated</th>
+      <th role="columnheader" scope="col">Appications</th>
+      <th role="columnheader" scope="col">Backends contained</th>
+      <th role="columnheader" scope="col">Unread alerts</th>
+      <th role="columnheader" scope="col"></th>
+    </tr>
+  </thead>
+  <tbody role="rowgroup">
+    {{range .Items}}
+    <tr role="row">
+      <td class="pf-c-table__check" role="cell">
+        <input type="checkbox" name="table-checkboxes-and-actions-checkrow1"
+          aria-labelledby="table-checkboxes-and-actions-node1" />
+      </td>
+      <td role="cell" data-label="Name">
+        <a href="{{ .Spec.Link }}">{{ .Spec.Name }}</a>
+      </td>
+      <td role="cell" data-label="System name">{{ .Spec.SystemName }}</td>
+      <td role="cell" data-label="Description">{{ .Spec.Description }}</td>
+      <td role="cell" data-label="Last updated">{{ .Spec.UpdatedAt }}</td>
+      <td role="cell" data-label="Applications">{{ .Spec.AppsCount }}</td>
+      <td role="cell" data-label="Backends contained">{{ .Spec.BackendsCount }}</td>
+      <td role="cell" data-label="Unread alerts">{{ .Spec.UnreadAlerts }}</td>
+      <td class="pf-c-table__action" role="cell">
+        <div class="pf-c-dropdown">
+          <button class="pf-c-dropdown__toggle pf-m-plain" type="button"
+            id="table-checkboxes-and-actions-dropdown-kebab-right-aligned-1-button" aria-expanded="false"
+            aria-label="Actions">
+            <i class="fas fa-ellipsis-v" aria-hidden="true"></i>
+          </button>
+          <ul class="pf-c-dropdown__menu pf-m-align-right"
+            aria-labelledby="table-checkboxes-and-actions-dropdown-kebab-right-aligned-1-button" hidden>
+            <li>
+              <a class="pf-c-dropdown__menu-item" href="#">Link</a>
+            </li>
+            <li>
+              <button class="pf-c-dropdown__menu-item" type="button">Action</button>
+            </li>
+            <li>
+              <a class="pf-c-dropdown__menu-item pf-m-disabled" href="#" aria-disabled="true" tabindex="-1">Disabled
+                link</a>
+            </li>
+            <li>
+              <button class="pf-c-dropdown__menu-item" type="button" disabled>Disabled action</button>
+            </li>
+            <li class="pf-c-divider" role="separator"></li>
+            <li>
+              <a class="pf-c-dropdown__menu-item" href="#">Separated link</a>
+            </li>
+          </ul>
+        </div>
+      </td>
+    </tr>
+    {{end}}
+  </tbody>
+</table>
+{{end}}
