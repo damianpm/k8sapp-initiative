@@ -1,0 +1,13 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: web-server
+  namespace: k8sinitiative
+spec:
+  host: k8sinitiative.apps.dev-eng-ocp4-5.dev.3sca.net
+  port:
+    targetPort: 8080
+  to:
+    kind: Service
+    name: web-server
+    weight: 100
