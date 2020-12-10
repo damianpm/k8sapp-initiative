@@ -1,14 +1,6 @@
 # Native K8s application
 
-**Overall Goal**: Proof of Concept. Develop a blueprint for the app architecture that runs on top of CRDs (and maybe other resources) and document do’s and don’ts along the way.
-
-Stages:
-1. Create a CRD of a product, backend or API spec. Consume CR data from another pod. (with an image that at least has curl)
-2. Instead of using an image that has curl, make it have a server and present a page that consumes the CR
-3. Instead of this simple page, use Portafly
-4. [Optional] Authorize the calls. We may use Keycloak. We might also explore using only OpenShift RBAC and users.
-
-
+To learn more about the goals and stages of this initiative plese look at our [About file](ABOUT.md).
 ## Setup
 
 ### Overview
@@ -19,7 +11,7 @@ You can use both [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubect
 
 ### Creating a namespace
 
-To avoid namespace pollution, create a [kubernetes namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/) called *k8sinitiative* in your cluster: 
+To avoid using your default or previous working [namespace](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/), let's create a new one called *k8sinitiative* in your cluster: 
 
 ```
 oc apply -f k8sinitiative_namespace.yml
@@ -27,7 +19,7 @@ oc apply -f k8sinitiative_namespace.yml
 
 ### Creating the Custom Resource Definition of a Product
 
-This project uses [kubernetes CRD's](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/), to create a representation of a *Product* in your cluster run:
+This project uses [kubernetes CRD's](https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/) to create a representation of a *Product* (based on 3scale Products). To create the CRD in your cluster run:
 
 ```
 oc apply -f product_crd.yml
@@ -43,24 +35,34 @@ oc apply -f products_examples.yml
 
 ### Setting the right permissions
 
-This project makes use of kubernetes [Sevice Account](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/), and [RBAC Authorization](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) using Role and Role Bindings as a means to authenticate against the apiserver.
+We are going to create a [Sevice Account](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/), to provide special [RBAC Authorization](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) using a custom role and binding it as a means to authenticate against the apiserver.
 
-Creating the **Service Account**:
+Creating the **Service Accounts**:
+
+There are two kind of Service Accounts: Admin (full access) and Viewer (read-only).
+
+To create the Admin SA, run:
 
 ```
 oc apply -f products_admin_sa.yml
 ```
 
+To create the Viewer SA, run:
+
+```
+oc apply -f products_viewer_sa.yml
+```
+
 Creating the **Roles**:
 
-There are two kind of roles available: Admin and Read-only, to create them run:
+There are two kind of roles available, corrresponding with the Admin and Viewer SA's, to create them run:
 
 ```
 oc apply -f products_admin_role.yml
 oc apply -f products_read_role.yml
 ```
 
-To create the **Role bindings** for both Admin and Read-only roles run:
+To create the **Role bindings** for both Admin and Viewer roles run:
 
 ```
 oc apply -f products_admin_rb.yml
@@ -76,6 +78,8 @@ You don't need to run the web server locally, you can just create a [kubernetes 
 ```
 oc apply -f web-server_deployment.yml
 ```
+
+Optionally, you can [run the web server locally](#optional-running-the-web-server-locally), see section below.
 
 ### Create a Service
 
@@ -94,6 +98,12 @@ oc apply -f web-server_route.yaml
 
 **Congratulations!**, now you can visit the application at: http://k8sinitiative.apps.dev-eng-ocp4-5.dev.3sca.net/
 
+**Important notes:**
+
+- The [host field](https://github.com/3scale/k8sapp-initiative/blob/master/web-server_route.yaml#L7) in `web-server_route.yaml` is currently pointing to a 3scale owned domain. You should change this to fit your needs, maybe using an environment variable accessible in your cluster.
+
+- *Routes* are specific to OpenShift, for alternatives see [alternatives to OpenShift](#optional-alternatives-to-openshift-routes) below.
+
 ### [OPTIONAL] Alternatives to OpenShift Routes
 
 If you don't have access to OpenShift or you prefer to use a kubernetes-only solution, you shoud create your own Ingress object.
@@ -106,7 +116,13 @@ Here are some useful documentation you can check:
 
 ### [OPTIONAL] Running the web server locally
 
-If you want to run the web server locally, for testing, debugging purposes or to collaborate with the project, you can:
+#### Configuration
+
+The web server is designed to run in the context of a kubernetes cluster and needs access to some special configuration and environment variables such as KUBERNETES_SERVICE_HOST, KUBERNETES_SERVICE_PORT and PORT. 
+
+If you want to run the web server locally **is your responsiblity to setup this configuration**.
+
+We have created a [controller](https://github.com/3scale/k8sapp-initiative/tree/master/controller) using the offical **Go client** for talking to the kubernetes cluster, you can find more info at https://github.com/kubernetes/client-go and https://pkg.go.dev/k8s.io/client-go.
 
 **Build and tag container image:**
 
@@ -129,4 +145,4 @@ Run server:
 ```
 go run main.go
 ```
-**Note**: You have to setup the needed enviroment variables in your cluster, such as KUBERNETES_SERVICE_HOST and KUBERNETES_SERVICE_PORT.
+
