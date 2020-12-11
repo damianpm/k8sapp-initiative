@@ -79,7 +79,7 @@ You don't need to run the web server locally, you can just create a [kubernetes 
 oc apply -f web-server_deployment.yml
 ```
 
-Optionally, you can [run the web server locally](#optional-running-the-web-server-locally), see section below.
+If you want to [modify the web server](#optional-modify-the-web-server), see section below.
 
 ### Create a Service
 
@@ -114,17 +114,17 @@ Here are some useful documentation you can check:
 
 [Kubernetes Ingress vs OpenShift Route](https://www.openshift.com/blog/kubernetes-ingress-vs-openshift-route)
 
-### [OPTIONAL] Running the web server locally
+### [OPTIONAL] Modify the web server
 
 #### Configuration
 
-The web server is designed to run in the context of a kubernetes cluster and needs access to some special configuration and environment variables such as KUBERNETES_SERVICE_HOST, KUBERNETES_SERVICE_PORT and PORT. 
-
-If you want to run the web server locally **is your responsiblity to setup this configuration**.
+The web server is designed to run in the context of a kubernetes cluster and needs access to some special configuration and environment variables such as KUBERNETES_SERVICE_HOST, KUBERNETES_SERVICE_PORT and PORT, **is your responsiblity to setup this configuration**.
 
 We have created a [controller](https://github.com/3scale/k8sapp-initiative/tree/master/controller) using the offical **Go client** for talking to the kubernetes cluster, you can find more info at https://github.com/kubernetes/client-go and https://pkg.go.dev/k8s.io/client-go.
 
-**Build and tag container image:**
+Once you are done with your modifications, you should build, tag and push your image and update the deployment.
+
+**Build, tag and push container image:**
 
 Change directory:
 ```
@@ -134,15 +134,13 @@ Build and tag the image:
 ```
 DOCKER_BUILDKIT=1 docker build -f Dockerfile -t <YOUR_USER>/<IMAGE_NAME> .
 ```
-**Run Go web server:**
 
-Change directory:
+Then push the image to your registry:
 ```
-cd pkg/
+docker push <YOUR_USERNAME>/<IMAGE_NAME>
 ```
-Run server:
 
-```
-go run main.go
-```
+**Update the image container in the deployment**
+
+In the `web-server_deployment.yml` file, you should change the [container image field](https://github.com/3scale/k8sapp-initiative/blob/master/web-server_deployment.yml#L20) to use the one you built in the previous step.
 
