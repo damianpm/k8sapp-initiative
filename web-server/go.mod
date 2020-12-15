@@ -1,4 +1,4 @@
-module github.com/3scale/k8sapp-initiative/web-server
+module github.com/damianpm/k8sapp-initiative/web-server
 
 go 1.13
 

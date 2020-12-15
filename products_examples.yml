@@ -1,8 +1,8 @@
-apiVersion: k8sinitiative.3scale.net/v1alpha1
+apiVersion: damian-k8s-initiative.3scale.net/v1alpha1
 kind: Product
 metadata:
   name: product-api-01
-  namespace: k8sinitiative
+  namespace: damian-k8s-initiative
 spec:
   description: "Product 1"
   apps_count: 1
@@ -28,11 +28,11 @@ spec:
   created_at: "1605407040000"
   updated_at: "1606125362370"
 ---
-apiVersion: k8sinitiative.3scale.net/v1alpha1
+apiVersion: damian-k8s-initiative.3scale.net/v1alpha1
 kind: Product
 metadata:
   name: product-api-02
-  namespace: k8sinitiative
+  namespace: damian-k8s-initiative
 spec:
   description: "Product 2"
   apps_count: 2
@@ -58,11 +58,11 @@ spec:
   created_at: "1605406215000"
   updated_at: "1606125384132"
 ---
-apiVersion: k8sinitiative.3scale.net/v1alpha1
+apiVersion: damian-k8s-initiative.3scale.net/v1alpha1
 kind: Product
 metadata:
   name: product-api-03
-  namespace: k8sinitiative
+  namespace: damian-k8s-initiative
 spec:
   description: "Product 3"
   apps_count: 1
@@ -88,11 +88,11 @@ spec:
   created_at: "1606839277962"
   updated_at: "1606839303838"
 ---
-apiVersion: k8sinitiative.3scale.net/v1alpha1
+apiVersion: damian-k8s-initiative.3scale.net/v1alpha1
 kind: Product
 metadata:
   name: product-api-04
-  namespace: k8sinitiative
+  namespace: damian-k8s-initiative
 spec:
   description: "Product 4"
   apps_count: 1

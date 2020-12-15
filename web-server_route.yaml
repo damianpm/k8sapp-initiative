@@ -2,9 +2,9 @@ apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
   name: web-server
-  namespace: k8sinitiative
+  namespace: damian-k8s-initiative
 spec:
-  host: k8sinitiative.apps.dev-eng-ocp4-5.dev.3sca.net
+  host: damian-k8s-initiative.apps.dev-eng-ocp4-5.dev.3sca.net
   port:
     targetPort: 8080
   to:

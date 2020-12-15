@@ -5,7 +5,7 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/3scale/k8sapp-initiative/web-server/pkg/apis/k8sinitiative.3scale.net/v1alpha1"
+	"github.com/damianpm/k8sapp-initiative/web-server/pkg/apis/k8sinitiative.3scale.net/v1alpha1"
 )
 
 // Index prints the list of products

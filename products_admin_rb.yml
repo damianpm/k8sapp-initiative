@@ -3,9 +3,9 @@ apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: products-admin-rb
 subjects:
-- kind: ServiceAccount
-  name: products-admin
-  namespace: k8sinitiative
+  - kind: ServiceAccount
+    name: products-admin
+    namespace: damian-k8s-initiative
 roleRef:
   kind: Role
   name: products-admin

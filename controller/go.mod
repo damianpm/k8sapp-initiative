@@ -1,4 +1,4 @@
-module github.com/3scale/k8sapp-initiative/controller
+module github.com/damianpm/k8sapp-initiative/controller
 
 require (
 	github.com/go-logr/logr v0.2.1

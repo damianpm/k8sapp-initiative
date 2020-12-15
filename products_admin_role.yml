@@ -1,9 +1,19 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  namespace: k8sinitiative
+  namespace: damian-k8s-initiative
   name: products-admin
 rules:
-- apiGroups: ["k8sinitiative.3scale.net"]
-  resources: ["products"]
-  verbs: ["watch", "get", "list", "create", "update", "patch", "delete", "deletecollection"]
+  - apiGroups: ["damian-k8s-initiative.3scale.net"]
+    resources: ["products"]
+    verbs:
+      [
+        "watch",
+        "get",
+        "list",
+        "create",
+        "update",
+        "patch",
+        "delete",
+        "deletecollection",
+      ]

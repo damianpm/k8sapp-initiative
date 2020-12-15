@@ -12,8 +12,8 @@ import (
 	"k8s.io/client-go/kubernetes/scheme"
 	"k8s.io/client-go/rest"
 
-	"github.com/3scale/k8sapp-initiative/web-server/pkg/apis/k8sinitiative.3scale.net/v1alpha1"
-	products "github.com/3scale/k8sapp-initiative/web-server/pkg/pages"
+	"github.com/damianpm/k8sapp-initiative/web-server/pkg/apis/k8sinitiative.3scale.net/v1alpha1"
+	products "github.com/damianpm/k8sapp-initiative/web-server/pkg/pages"
 )
 
 const homepageEndPoint = "/"
@@ -85,7 +85,7 @@ func handleProductsPage(w http.ResponseWriter, r *http.Request) {
 
 	getErr := restClient.
 		Get().
-		Namespace("k8sinitiative").
+		Namespace("damian-k8s-initiative").
 		Resource("products").
 		Do().
 		Into(&result)

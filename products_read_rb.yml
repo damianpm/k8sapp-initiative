@@ -3,9 +3,9 @@ apiVersion: rbac.authorization.k8s.io/v1
 metadata:
   name: products-read-rb
 subjects:
-- kind: ServiceAccount
-  name: products-viewer
-  namespace: k8sinitiative
+  - kind: ServiceAccount
+    name: products-viewer
+    namespace: damian-k8s-initiative
 roleRef:
   kind: Role
   name: products-read

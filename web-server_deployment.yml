@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: web-server-deployment
-  namespace: k8sinitiative
+  namespace: damian-k8s-initiative
 spec:
   selector:
     matchLabels:
@@ -14,12 +14,12 @@ spec:
         app: web-server
     spec:
       serviceAccountName: products-admin
-      namespace: k8sinitiative
+      namespace: damian-k8s-initiative
       containers:
-      - name: web-server
-        image: quay.io/didierofrivia/go-fetch-products:latest
-        env:
-        - name: PORT
-          value: "8080"
-        ports:
-        - containerPort: 8080
+        - name: web-server
+          image: damianpm/go-fetch-products:latest
+          env:
+            - name: PORT
+              value: "8080"
+          ports:
+            - containerPort: 8080

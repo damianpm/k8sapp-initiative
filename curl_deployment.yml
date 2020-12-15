@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: curl-deployment
-  namespace: k8sinitiative
+  namespace: damian-k8s-initiative
 spec:
   selector:
     matchLabels:
@@ -14,8 +14,8 @@ spec:
         app: curlpod
     spec:
       containers:
-      - name: curlpod
-        image: radial/busyboxplus:curl
-        imagePullPolicy: IfNotPresent
-        command: ["/bin/sh"]
-        args: ["-c", "while true; do echo hello; sleep 10;done"]
+        - name: curlpod
+          image: radial/busyboxplus:curl
+          imagePullPolicy: IfNotPresent
+          command: ["/bin/sh"]
+          args: ["-c", "while true; do echo hello; sleep 10;done"]

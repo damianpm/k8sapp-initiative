@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/3scale/k8sapp-initiative/pkg/apis/k8sinitiative.3scale.net/v1alpha1"
+	"github.com/damianpm/k8sapp-initiative/web-server/pkg/apis/k8sinitiative.3scale.net/v1alpha1"
 
 	"k8s.io/client-go/kubernetes/scheme"
 	"sigs.k8s.io/controller-runtime/pkg/client"
@@ -17,7 +17,7 @@ var kubeconfig string
 
 func main() {
 
-	ns := "k8sinitiative"
+	ns := "damian-k8s-initiative"
 
 	s := scheme.Scheme
 	v1alpha1.AddToScheme(s)
